@@ -1,5 +1,6 @@
 import { useCallback } from 'react';
-import { Alert, FlatList, Text, View, StyleSheet } from 'react-native';
+import { useState } from 'react';
+import { FlatList, Text, View, StyleSheet } from 'react-native';
 import { Stack, useFocusEffect } from 'expo-router';
 import { useSQLiteContext } from 'expo-sqlite';
 import { emptyTrash, purgeLink, restoreLink } from '@/services/linkService';
@@ -10,6 +11,7 @@ import { radii, spacing, typography } from '@/theme/tokens';
 import type { Link } from '@/types/link';
 import { EmptyState } from '@/components/EmptyState';
 import { SecondaryButton } from '@/components/Buttons';
+import { ConfirmDialog, type ConfirmOptions } from '@/components/ConfirmDialog';
 import { LinkThumbnail } from '@/components/LinkThumbnail';
 import { pluralize } from '@/utils/format';
 
@@ -31,33 +33,33 @@ export default function TrashScreen() {
     reload();
   };
 
+  const [confirm, setConfirm] = useState<ConfirmOptions | null>(null);
+
   const deleteForever = (link: Link) =>
-    Alert.alert('Delete permanently?', `"${link.title}" will be removed for good. This cannot be undone.`, [
-      { text: 'Cancel', style: 'cancel' },
-      {
-        text: 'Delete forever',
-        style: 'destructive',
-        onPress: async () => {
-          await purgeLink(db, link.id);
-          toast.show('Deleted permanently');
-          reload();
-        },
+    setConfirm({
+      title: 'Delete permanently?',
+      message: `"${link.title}" will be removed for good. This cannot be undone.`,
+      confirmLabel: 'Delete forever',
+      destructive: true,
+      onConfirm: async () => {
+        await purgeLink(db, link.id);
+        toast.show('Deleted permanently');
+        reload();
       },
-    ]);
+    });
 
   const confirmEmpty = () =>
-    Alert.alert('Empty Trash?', 'Every link in Trash will be deleted permanently.', [
-      { text: 'Cancel', style: 'cancel' },
-      {
-        text: 'Empty Trash',
-        style: 'destructive',
-        onPress: async () => {
-          await emptyTrash(db);
-          toast.show('Trash emptied');
-          reload();
-        },
+    setConfirm({
+      title: 'Empty Trash?',
+      message: 'Every link in Trash will be deleted permanently. This cannot be undone.',
+      confirmLabel: 'Empty Trash',
+      destructive: true,
+      onConfirm: async () => {
+        await emptyTrash(db);
+        toast.show('Trash emptied');
+        reload();
       },
-    ]);
+    });
 
   return (
     <View style={[styles.screen, { backgroundColor: colors.background }]}>
@@ -99,6 +101,7 @@ export default function TrashScreen() {
           )
         }
       />
+      <ConfirmDialog options={confirm} onClose={() => setConfirm(null)} />
     </View>
   );
 }

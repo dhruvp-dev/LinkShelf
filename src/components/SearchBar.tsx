@@ -9,10 +9,12 @@ type Props = {
   onChangeText: (text: string) => void;
   placeholder?: string;
   autoFocus?: boolean;
+  onFocus?: () => void;
+  onBlur?: () => void;
   onSubmit?: () => void;
 };
 
-export function SearchBar({ value, onChangeText, placeholder = 'Search links', autoFocus, onSubmit }: Props) {
+export function SearchBar({ value, onChangeText, placeholder = 'Search links', autoFocus, onSubmit, onFocus, onBlur }: Props) {
   const { colors } = useTheme();
   return (
     <Surface style={styles.wrap}>
@@ -23,6 +25,8 @@ export function SearchBar({ value, onChangeText, placeholder = 'Search links', a
         placeholder={placeholder}
         placeholderTextColor={colors.muted}
         autoFocus={autoFocus}
+        onFocus={onFocus}
+        onBlur={onBlur}
         autoCapitalize="none"
         autoCorrect={false}
         returnKeyType="search"

@@ -1,7 +1,7 @@
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useCallback, useEffect, useState } from 'react';
 import { FlatList, Pressable, ScrollView, Text, View, StyleSheet } from 'react-native';
-import { useRouter } from 'expo-router';
+import { useFocusEffect, useNavigation, useRouter } from 'expo-router';
 import { Icon, type IconName } from '@/components/Icon';
 import { useSQLiteContext } from 'expo-sqlite';
 import { useSettings } from '@/hooks/useSettings';
@@ -17,7 +17,7 @@ import { SearchBar } from '@/components/SearchBar';
 import { SortMenu } from '@/components/SortMenu';
 import { LinkRow } from '@/components/LinkRow';
 import { EmptyState } from '@/components/EmptyState';
-import { useFocusEffect } from 'expo-router';
+import { tabBarStyle } from '@/components/tabBarStyle';
 
 type Filter = 'all' | 'links' | 'folders' | 'starred' | 'tags';
 const FILTERS: { key: Filter; label: string }[] = [
@@ -38,10 +38,24 @@ function scopeFor(filter: Filter): { searchScope: SearchScope; starred: boolean 
 
 export default function SearchScreen() {
   const router = useRouter();
+  const navigation = useNavigation();
   const db = useSQLiteContext();
   const { colors } = useTheme();
   const insets = useSafeAreaInsets();
   const { defaultSort } = useSettings();
+
+  // Hide the tab bar while typing so the keyboard doesn't push it up. Restored on blur and on leave.
+  const setTabBarVisible = useCallback(
+    (visible: boolean) => {
+      navigation.setOptions({ tabBarStyle: visible ? tabBarStyle(colors) : { display: 'none' } });
+    },
+    [navigation, colors],
+  );
+  useFocusEffect(
+    useCallback(() => {
+      return () => setTabBarVisible(true);
+    }, [setTabBarVisible]),
+  );
   const [text, setText] = useState('');
   const [filter, setFilter] = useState<Filter>('all');
   const [sort, setSort] = useState<SortKey>(defaultSort);
@@ -69,7 +83,7 @@ export default function SearchScreen() {
     <View style={[styles.screen, { backgroundColor: colors.background, paddingTop: insets.top }]}>
       <View style={styles.searchRow}>
         <View style={{ flex: 1 }}>
-          <SearchBar value={text} onChangeText={setText} onSubmit={commit} placeholder="Titles, domains, shelves, tags" />
+          <SearchBar value={text} onChangeText={setText} onSubmit={commit} onFocus={() => setTabBarVisible(false)} onBlur={() => setTabBarVisible(true)} placeholder="Titles, domains, shelves, tags" />
         </View>
       </View>
 

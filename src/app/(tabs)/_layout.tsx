@@ -2,8 +2,8 @@ import { Tabs, useRouter } from 'expo-router';
 import { Pressable, Text, View, StyleSheet } from 'react-native';
 import { Icon, type IconName } from '@/components/Icon';
 import { useTheme } from '@/theme/useTheme';
+import { tabBarStyle } from '@/components/tabBarStyle';
 
-const TAB_HEIGHT = 60;
 
 /**
  * iOS-style bottom bar: solid surface with a hairline top edge, icon-only tabs, and a round accent
@@ -30,7 +30,7 @@ export default function TabsLayout() {
   const { colors } = useTheme();
   const icon = (name: IconName) =>
     function TabIcon({ focused }: { focused: boolean }) {
-      return <Icon name={name} size={24} color={focused ? colors.accent : colors.muted} />;
+      return <Icon name={name} size={24} filled={focused} color={focused ? colors.accent : colors.muted} />;
     };
   return (
     <Tabs
@@ -39,7 +39,7 @@ export default function TabsLayout() {
         tabBarActiveTintColor: colors.accent,
         tabBarInactiveTintColor: colors.muted,
         tabBarShowLabel: false,
-        tabBarStyle: { height: TAB_HEIGHT, borderTopWidth: StyleSheet.hairlineWidth, borderTopColor: colors.border, backgroundColor: colors.card, elevation: 0 },
+        tabBarStyle: tabBarStyle(colors),
         tabBarItemStyle: { justifyContent: 'center' },
       }}
     >

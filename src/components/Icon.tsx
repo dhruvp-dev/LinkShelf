@@ -51,9 +51,34 @@ import {
   IconArrowsSort,
   IconDatabase,
   IconRefresh,
+  IconHomeFilled,
+  IconSearchFilled,
+  IconStackFilled,
+  IconSettingsFilled,
+  IconStarFilled as IconStarSolid,
+  IconLayoutGridFilled,
+  IconUserFilled,
+  IconPlusFilled,
+  IconBookmarkFilled,
+  IconFolderFilled,
 } from '@tabler/icons-react-native';
 
 type IconProps = { size?: number; color?: string; strokeWidth?: number };
+
+/** Filled variants used for the active tab and selected states. Names without an entry stay outlined. */
+const FILLED: Partial<Record<string, ComponentType<IconProps>>> = {
+  home: IconHomeFilled,
+  search: IconSearchFilled,
+  folders: IconStackFilled,
+  folder: IconFolderFilled,
+  settings: IconSettingsFilled,
+  star: IconStarSolid,
+  'star-filled': IconStarSolid,
+  grid: IconLayoutGridFilled,
+  person: IconUserFilled,
+  add: IconPlusFilled,
+  bookmark: IconBookmarkFilled,
+};
 
 /**
  * Tabler icons for every glyph in the app. Callers keep the same names; this table is the only
@@ -129,7 +154,7 @@ const ICONS = {
 
 export type IconName = keyof typeof ICONS;
 
-export function Icon({ name, size = 20, color = '#000', strokeWidth = 1.8 }: IconProps & { name: IconName }) {
-  const Glyph = ICONS[name] as ComponentType<IconProps>;
+export function Icon({ name, size = 20, color = '#000', strokeWidth = 1.8, filled = false }: IconProps & { name: IconName; filled?: boolean }) {
+  const Glyph = (filled && FILLED[name]) || (ICONS[name] as ComponentType<IconProps>);
   return <Glyph size={size} color={color} strokeWidth={strokeWidth} />;
 }
