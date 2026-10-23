@@ -1,4 +1,4 @@
-# LinkShelf 📁✨
+# LinkShelf
 
 > **Your internet, effortlessly organized.**  
 > Save articles, videos, recipes, and inspiration from Instagram, YouTube, and the web. Stored 100% locally on your device — fast, private, and beautifully tactile.
@@ -8,73 +8,73 @@
 [![Expo SDK 58](https://img.shields.io/badge/Expo-SDK_58-000020.svg?style=flat&logo=expo)](https://expo.dev)
 [![React Native 0.88](https://img.shields.io/badge/React_Native-0.88-61DAFB.svg?style=flat&logo=react)](https://reactnative.dev)
 [![SQLite Local-First](https://img.shields.io/badge/Storage-SQLite_(Local_First)-003B57.svg?style=flat&logo=sqlite)](https://docs.expo.dev/versions/latest/sdk/sqlite/)
-[![Privacy Focused](https://img.shields.io/badge/Privacy-100%25_On--Device-success.svg?style=flat)](#-privacy-first--local-first)
+[![Privacy Focused](https://img.shields.io/badge/Privacy-100%25_On--Device-success.svg?style=flat)](#privacy-guarantee)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
 ---
 
-## 🌟 Why LinkShelf?
+## Why LinkShelf?
 
 Bookmarks get lost in browser tab overload. Instagram saved posts vanish into algorithmic feeds. YouTube's "Watch Later" turns into a digital junk drawer.
 
-**LinkShelf** brings peace to your digital archive. It provides a single, distraction-free shelf for everything you want to read, watch, or revisit later. Designed with Apple-grade fluid motion, tactile spring physics, and an unwavering commitment to personal privacy.
+**LinkShelf** brings order to your digital archive. It provides a single, distraction-free shelf for everything you want to read, watch, or revisit later. Designed with Apple-grade fluid motion, tactile spring physics, and an uncompromising commitment to personal privacy.
 
 ---
 
-## ✨ Features You’ll Love
+## Key Features
 
-### 🚀 Instant Share Sheet Integration
-Save links in seconds without even opening the app. Tap **Share** from Safari, Chrome, YouTube, or Instagram, select **LinkShelf**, and your link is automatically parsed and ready on your shelf.
+### Instant Share Sheet Integration
+Save links in seconds without opening the app first. Tap **Share** from Safari, Chrome, YouTube, or Instagram, select **LinkShelf**, and your link is automatically parsed and placed onto your shelf.
 
-### 🔒 100% Local-First & Private
+### 100% Local-First & Private
 - **Zero mandatory accounts**: No passwords, no logins, no cloud tracking.
 - **On-device SQLite database**: Your links, notes, and collections never leave your phone.
-- **Offline ready**: Access, organize, search, and manage your entire shelf with airplane mode on.
+- **Offline ready**: Access, organize, search, and manage your entire shelf with airplane mode active.
 
-### 🎨 Fluid, Tactile Apple-Inspired Design
+### Fluid, Tactile Apple-Inspired Design
 Built following **Kevin's 10 Rules for Polished UI** and Emil Kowalski’s fluid animation philosophy:
 - **Direct physical feedback**: Every card and button firms down with a natural `scale(0.98)` spring press.
-- **Magnetic sliding indicators**: Segmented controls (Grid ⊞ / List ☰) glide smoothly under your finger with selection haptics.
+- **Magnetic sliding indicators**: Segmented controls (Grid / List) glide smoothly under your finger with selection haptics.
 - **Sub-pixel hairline depth**: No harsh dark drop shadows. Real depth is rendered through layered light and hairline rings.
-- **Symmetric entrances & exits**: Bottom sheets and toast capsules animate smoothly along their physical trajectory.
+- **Symmetric entrances & exits**: Bottom sheets and toast capsules animate along their natural physical trajectory.
 
-### 📁 Smart Folders & Starred Favorites
+### Smart Folders & Starred Favorites
 - Color-code folders for *Articles*, *Design Inspo*, *Cooking*, *Research*, or *Travel*.
-- Star critical links for 1-tap access on your Home screen.
+- Star important links for one-tap access directly on your Home screen.
 - Safe folder management: deleting a folder never deletes your links — they simply return to your main shelf.
 
-### 🔍 Lightning-Fast Instant Search
+### Instant Search & Sorting
 - Instant, debounced search across titles, URLs, and domains.
 - Filter by folder or sort by *Recently Saved*, *Oldest*, or *Alphabetical (A–Z / Z–A)*.
 
-### 🖼️ Rich Automatic Previews
+### Rich Automatic Previews
 - Automatically fetches high-resolution Open Graph cover images, page titles, and favicons.
-- Dedicated platform badges identify where each link came from (YouTube, Instagram, GitHub, X/Twitter, etc.).
+- Dedicated platform badges identify where each link originated (YouTube, Instagram, GitHub, X/Twitter, and more).
 
-### 🌗 Dark & Light Themes
-- Warm paper-inspired light palette (`#f7f7f4` / `#f2f1ed`) that's gentle on the eyes.
-- Sleek obsidian dark theme (`#1b1b1f` / `#24242a`) for night-time reading.
+### Dark & Light Themes
+- Warm paper-inspired light palette (`#f7f7f4` / `#f2f1ed`) that is gentle on the eyes.
+- Sleek obsidian dark theme (`#1b1b1f` / `#24242a`) for comfortable night reading.
 - Crisp typography set in **Inter**.
 
-### 📦 Safe Trash & Zero Lock-In
-- **Two-step deletion**: Accidental deletions go to **Trash**, where you can restore them anytime.
+### Safe Trash & Zero Lock-In
+- **Two-step deletion**: Accidental deletions move to **Trash**, where you can restore them at any time.
 - **JSON Export & Import**: Backup your entire library in one tap or transfer it to another device. Your data belongs to you.
 
 ---
 
-## 📱 App Tour
+## App Tour
 
 | Screen | What It Does |
 | :--- | :--- |
-| **🏠 Home Shelf** | Browse all your saved links in Grid or List view. Quick folder chips and starred toggles. |
-| **🔍 Search** | Real-time search across your entire archive by title, description, or domain. |
-| **➕ Save Link** | Paste a URL or receive one via Share Sheet. Preview card renders instantly with folder picker. |
-| **📁 Folders** | View and organize collections with custom color palettes and folder counts. |
-| **⚙️ Settings** | Theme switcher (System / Light / Dark), default view mode, JSON Backup/Restore, and Trash. |
+| **Home Shelf** | Browse all your saved links in Grid or List view. Quick folder chips and starred toggles. |
+| **Search** | Real-time search across your entire archive by title, description, or domain. |
+| **Save Link** | Paste a URL or receive one via Share Sheet. Preview card renders instantly with folder picker. |
+| **Folders** | View and organize collections with custom color palettes and link counts. |
+| **Settings** | Theme switcher (System / Light / Dark), default view mode, JSON Backup/Restore, and Trash. |
 
 ---
 
-## 🛠️ Quick Start (For Developers & Testers)
+## Quick Start (For Developers & Testers)
 
 ### Prerequisites
 - [Node.js](https://nodejs.org/) (v18+)
@@ -106,11 +106,9 @@ npx expo run:android
 npx expo run:ios
 ```
 
-Once running, share any link from Chrome, YouTube, or Safari into LinkShelf!
-
 ---
 
-## 🧪 Verification & Quality Checks
+## Verification & Quality Checks
 
 LinkShelf ships with strict quality baselines:
 
@@ -122,19 +120,19 @@ npx impeccable detect   # Impeccable design quality and anti-pattern scanner
 
 ---
 
-## 🛡️ Privacy Guarantee
+## Privacy Guarantee
 
-> **Privacy is not an afterthought; it is our foundation.**  
+> **Privacy is our foundation.**  
 > LinkShelf will never sell your browsing history, inject advertisements, or require an email address. Link metadata is fetched strictly between your device and the destination website.
 
 ---
 
-## 📄 License
+## License
 
-Distributed under the **MIT License**. See [`LICENSE`](LICENSE) for more information.
+Distributed under the **MIT License**. See [`LICENSE`](LICENSE) for details.
 
 ---
 
 <p align="center">
-  Crafted with care for a calmer, more organized web. 🍃
+  Crafted with care for a calmer, more organized web.
 </p>
