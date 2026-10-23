@@ -28,9 +28,10 @@ function SaveButton() {
 
 export default function TabsLayout() {
   const { colors } = useTheme();
-  const icon = (name: IconName) =>
+  // Only Home fills when active; the other tabs stay outlined.
+  const icon = (name: IconName, fillWhenActive = false) =>
     function TabIcon({ focused }: { focused: boolean }) {
-      return <Icon name={name} size={24} filled={focused} color={focused ? colors.accent : colors.muted} />;
+      return <Icon name={name} size={24} filled={fillWhenActive && focused} color={focused ? colors.accent : colors.muted} />;
     };
   return (
     <Tabs
@@ -43,7 +44,7 @@ export default function TabsLayout() {
         tabBarItemStyle: { justifyContent: 'center' },
       }}
     >
-      <Tabs.Screen name="index" options={{ title: 'Home', tabBarIcon: icon('home') }} />
+      <Tabs.Screen name="index" options={{ title: 'Home', tabBarIcon: icon('home', true) }} />
       <Tabs.Screen name="search" options={{ title: 'Search', tabBarIcon: icon('search') }} />
       <Tabs.Screen name="save" options={{ title: '', tabBarButton: () => <SaveButton /> }} />
       <Tabs.Screen name="folders" options={{ title: 'Shelves', tabBarIcon: icon('folders') }} />

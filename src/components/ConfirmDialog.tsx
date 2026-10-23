@@ -44,26 +44,29 @@ export function ConfirmDialog({ options, onClose }: Props) {
         <Pressable style={StyleSheet.absoluteFill} onPress={onClose} accessibilityLabel="Cancel" />
         <View style={[styles.dialog, { backgroundColor: colors.card, borderColor: colors.border }]} accessibilityRole="alert">
           {shown.destructive && (
-            <View style={[styles.badge, { backgroundColor: `${colors.danger}1a` }]}>
-              <Icon name="trash-outline" size={20} color={colors.danger} />
+            <View style={styles.iconWrap}>
+              <Icon name="trash-outline" size={22} color={colors.danger} />
             </View>
           )}
           <Text style={[typography.section, { color: colors.text }]}>{shown.title}</Text>
           <Text style={[typography.body, { color: colors.muted }]}>{shown.message}</Text>
           <View style={styles.actions}>
             <Pressable
+              onPress={confirm}
+              accessibilityRole="button"
+              accessibilityLabel={shown.confirmLabel}
+              style={({ pressed }) => [styles.button, { backgroundColor: tint, opacity: pressed ? 0.85 : 1 }]}
+            >
+              <Text style={[typography.section, { color: colors.background, fontSize: 15 }]} numberOfLines={1}>
+                {shown.confirmLabel}
+              </Text>
+            </Pressable>
+            <Pressable
               onPress={onClose}
               accessibilityRole="button"
               style={({ pressed }) => [styles.button, { backgroundColor: colors.surface, opacity: pressed ? 0.7 : 1 }]}
             >
               <Text style={[typography.section, { color: colors.text, fontSize: 15 }]}>Cancel</Text>
-            </Pressable>
-            <Pressable
-              onPress={confirm}
-              accessibilityRole="button"
-              style={({ pressed }) => [styles.button, { backgroundColor: tint, opacity: pressed ? 0.85 : 1 }]}
-            >
-              <Text style={[typography.section, { color: colors.background, fontSize: 15 }]}>{shown.confirmLabel}</Text>
             </Pressable>
           </View>
         </View>
@@ -82,7 +85,7 @@ const styles = StyleSheet.create({
     padding: spacing.xl,
     gap: spacing.sm,
   },
-  badge: { width: 40, height: 40, borderRadius: radii.md, alignItems: 'center', justifyContent: 'center', marginBottom: spacing.xs },
-  actions: { flexDirection: 'row', gap: spacing.sm, marginTop: spacing.lg },
-  button: { flex: 1, height: 48, borderRadius: radii.md, alignItems: 'center', justifyContent: 'center' },
+  iconWrap: { alignSelf: 'center' },
+  actions: { gap: spacing.sm, marginTop: spacing.lg },
+  button: { height: 48, paddingHorizontal: spacing.lg, borderRadius: radii.md, alignItems: 'center', justifyContent: 'center' },
 });

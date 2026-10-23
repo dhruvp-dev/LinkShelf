@@ -32,7 +32,6 @@ export default function SettingsScreen() {
 
   const iconLabel = APP_ICONS.find((i) => i.id === appIcon)?.label ?? 'Classic';
   const version = Constants.expoConfig?.version ?? '1.0.0';
-  const build = Constants.nativeBuildVersion ?? 'Development';
 
   const runData = async (label: string, task: () => Promise<string | void>) => {
     try {
@@ -159,8 +158,6 @@ export default function SettingsScreen() {
 
       <Group title="About">
         <Row icon="info" label="LinkShelf" value={`Version ${version}`} />
-        <Row icon="database" label="Build" value={build} />
-        <Row icon="database" label="Storage" value="On this device" />
         <Row icon="refresh" label="Check for updates" accent last onPress={checkForUpdates} />
       </Group>
 
