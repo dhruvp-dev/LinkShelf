@@ -1,67 +1,63 @@
 import type { ComponentType } from 'react';
-import {
-  IconArrowBackUp,
-  IconBook,
-  IconBookmark,
-  IconBrandGoogle,
-  IconBrandInstagram,
-  IconBrandYoutube,
-  IconBulb,
-  IconCheck,
-  IconChevronRight,
-  IconCircleX,
-  IconClipboard,
-  IconClock,
-  IconCode,
-  IconCoffee,
-  IconCompass,
-  IconCopy,
-  IconDeviceMobile,
-  IconDots,
-  IconDownload,
-  IconExternalLink,
-  IconFolder,
-  IconFolderOpen,
-  IconHeart,
-  IconHome,
-  IconInfoCircle,
-  IconLayoutGrid,
-  IconLink,
-  IconList,
-  IconMoon,
-  IconMovie,
-  IconMusic,
-  IconPalette,
-  IconPencil,
-  IconPlane,
-  IconPlus,
-  IconSearch,
-  IconSettings,
-  IconStack2,
-  IconStar,
-  IconStarFilled,
-  IconSun,
-  IconTrash,
-  IconUpload,
-  IconUser,
-  IconWorld,
-  IconX,
-  IconSunMoon,
-  IconLayoutList,
-  IconArrowsSort,
-  IconDatabase,
-  IconRefresh,
-  IconHomeFilled,
-  IconSearchFilled,
-  IconStackFilled,
-  IconSettingsFilled,
-  IconStarFilled as IconStarSolid,
-  IconLayoutGridFilled,
-  IconUserFilled,
-  IconPlusFilled,
-  IconBookmarkFilled,
-  IconFolderFilled,
-} from '@tabler/icons-react-native';
+import IconArrowBackUp from '@tabler/icons-react-native/IconArrowBackUp';
+import IconBook from '@tabler/icons-react-native/IconBook';
+import IconBookmark from '@tabler/icons-react-native/IconBookmark';
+import IconBrandInstagram from '@tabler/icons-react-native/IconBrandInstagram';
+import IconBrandYoutube from '@tabler/icons-react-native/IconBrandYoutube';
+import IconBulb from '@tabler/icons-react-native/IconBulb';
+import IconCheck from '@tabler/icons-react-native/IconCheck';
+import IconChevronRight from '@tabler/icons-react-native/IconChevronRight';
+import IconCircleX from '@tabler/icons-react-native/IconCircleX';
+import IconClipboard from '@tabler/icons-react-native/IconClipboard';
+import IconClock from '@tabler/icons-react-native/IconClock';
+import IconCode from '@tabler/icons-react-native/IconCode';
+import IconCoffee from '@tabler/icons-react-native/IconCoffee';
+import IconCompass from '@tabler/icons-react-native/IconCompass';
+import IconCopy from '@tabler/icons-react-native/IconCopy';
+import IconDeviceMobile from '@tabler/icons-react-native/IconDeviceMobile';
+import IconDots from '@tabler/icons-react-native/IconDots';
+import IconDownload from '@tabler/icons-react-native/IconDownload';
+import IconExternalLink from '@tabler/icons-react-native/IconExternalLink';
+import IconFolder from '@tabler/icons-react-native/IconFolder';
+import IconFolderOpen from '@tabler/icons-react-native/IconFolderOpen';
+import IconHeart from '@tabler/icons-react-native/IconHeart';
+import IconHome from '@tabler/icons-react-native/IconHome';
+import IconInfoCircle from '@tabler/icons-react-native/IconInfoCircle';
+import IconLayoutGrid from '@tabler/icons-react-native/IconLayoutGrid';
+import IconLink from '@tabler/icons-react-native/IconLink';
+import IconList from '@tabler/icons-react-native/IconList';
+import IconMoon from '@tabler/icons-react-native/IconMoon';
+import IconMovie from '@tabler/icons-react-native/IconMovie';
+import IconMusic from '@tabler/icons-react-native/IconMusic';
+import IconPalette from '@tabler/icons-react-native/IconPalette';
+import IconPencil from '@tabler/icons-react-native/IconPencil';
+import IconPlane from '@tabler/icons-react-native/IconPlane';
+import IconPlus from '@tabler/icons-react-native/IconPlus';
+import IconSearch from '@tabler/icons-react-native/IconSearch';
+import IconSettings from '@tabler/icons-react-native/IconSettings';
+import IconStack2 from '@tabler/icons-react-native/IconStack2';
+import IconStar from '@tabler/icons-react-native/IconStar';
+import IconStarFilled from '@tabler/icons-react-native/IconStarFilled';
+import IconSun from '@tabler/icons-react-native/IconSun';
+import IconTrash from '@tabler/icons-react-native/IconTrash';
+import IconUpload from '@tabler/icons-react-native/IconUpload';
+import IconUser from '@tabler/icons-react-native/IconUser';
+import IconWorld from '@tabler/icons-react-native/IconWorld';
+import IconX from '@tabler/icons-react-native/IconX';
+import IconSunMoon from '@tabler/icons-react-native/IconSunMoon';
+import IconLayoutList from '@tabler/icons-react-native/IconLayoutList';
+import IconArrowsSort from '@tabler/icons-react-native/IconArrowsSort';
+import IconDatabase from '@tabler/icons-react-native/IconDatabase';
+import IconRefresh from '@tabler/icons-react-native/IconRefresh';
+import IconHomeFilled from '@tabler/icons-react-native/IconHomeFilled';
+import IconSearchFilled from '@tabler/icons-react-native/IconSearchFilled';
+import IconStackFilled from '@tabler/icons-react-native/IconStackFilled';
+import IconSettingsFilled from '@tabler/icons-react-native/IconSettingsFilled';
+import IconLayoutGridFilled from '@tabler/icons-react-native/IconLayoutGridFilled';
+import IconUserFilled from '@tabler/icons-react-native/IconUserFilled';
+import IconPlusFilled from '@tabler/icons-react-native/IconPlusFilled';
+import IconBookmarkFilled from '@tabler/icons-react-native/IconBookmarkFilled';
+import IconFolderFilled from '@tabler/icons-react-native/IconFolderFilled';
 
 type IconProps = { size?: number; color?: string; strokeWidth?: number };
 
@@ -72,8 +68,8 @@ const FILLED: Partial<Record<string, ComponentType<IconProps>>> = {
   folders: IconStackFilled,
   folder: IconFolderFilled,
   settings: IconSettingsFilled,
-  star: IconStarSolid,
-  'star-filled': IconStarSolid,
+  star: IconStarFilled,
+  'star-filled': IconStarFilled,
   grid: IconLayoutGridFilled,
   person: IconUserFilled,
   add: IconPlusFilled,

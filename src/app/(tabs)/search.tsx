@@ -11,7 +11,7 @@ import { useLinkActions } from '@/hooks/useLinkActions';
 import { addRecentSearch, clearRecentSearches, getRecentSearches } from '@/services/settingsService';
 import { useTheme } from '@/theme/useTheme';
 import { radii, spacing, typography } from '@/theme/tokens';
-import type { SortKey } from '@/types/link';
+import type { Link, SortKey } from '@/types/link';
 import type { SearchScope } from '@/database/queries';
 import { SearchBar } from '@/components/SearchBar';
 import { SortMenu } from '@/components/SortMenu';
@@ -72,10 +72,25 @@ export default function SearchScreen() {
   }, [refreshRecent]));
   useEffect(() => setSort(defaultSort), [defaultSort]);
 
-  const commit = async () => {
+  const commit = useCallback(async () => {
     await addRecentSearch(db, text);
     refreshRecent();
-  };
+  }, [db, text, refreshRecent]);
+
+  // Stable handler + renderItem so memoized rows skip re-rendering on every keystroke.
+  const openLink = useCallback(
+    (link: Link) => {
+      commit();
+      router.push(`/links/${link.id}`);
+    },
+    [commit, router],
+  );
+  const renderItem = useCallback(
+    ({ item }: { item: Link }) => (
+      <LinkRow link={item} onPress={openLink} onToggleStar={actions.toggleStar} onMore={actions.onMore} />
+    ),
+    [openLink, actions.toggleStar, actions.onMore],
+  );
 
   const hasQuery = debounced.length > 0;
 
@@ -109,17 +124,7 @@ export default function SearchScreen() {
           data={items}
           keyExtractor={(item) => item.id}
           ListHeaderComponent={<SortMenu value={sort} onChange={setSort} />}
-          renderItem={({ item }) => (
-            <LinkRow
-              link={item}
-              onPress={(link) => {
-                commit();
-                router.push(`/links/${link.id}`);
-              }}
-              onToggleStar={actions.toggleStar}
-              onMore={actions.onMore}
-            />
-          )}
+          renderItem={renderItem}
           onEndReached={loadMore}
           contentContainerStyle={{ paddingTop: spacing.sm, paddingBottom: 140, flexGrow: 1 }}
           keyboardShouldPersistTaps="handled"

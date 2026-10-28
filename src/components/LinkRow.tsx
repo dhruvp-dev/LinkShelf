@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { Pressable, Text, View, StyleSheet } from 'react-native';
 import Animated, { useAnimatedStyle, useSharedValue, withSpring } from 'react-native-reanimated';
 import { Icon, type IconName } from '@/components/Icon';
@@ -58,7 +59,7 @@ function LinkRowBase({ link, onPress, onToggleStar, onMore }: Props) {
   );
 }
 
-export const LinkRow = LinkRowBase;
+export const LinkRow = memo(LinkRowBase);
 
 const styles = StyleSheet.create({
   row: {

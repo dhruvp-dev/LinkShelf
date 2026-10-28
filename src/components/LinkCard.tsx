@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { Pressable, Text, View, StyleSheet } from 'react-native';
 import { Card } from './Card';
 import { Icon } from '@/components/Icon';
@@ -60,7 +61,7 @@ export function FolderTag({ name, color }: { name: string; color: string | null 
   );
 }
 
-export const LinkCard = LinkCardBase;
+export const LinkCard = memo(LinkCardBase);
 
 const styles = StyleSheet.create({
   card: { flex: 1, borderRadius: 12, margin: spacing.xs },

@@ -1,4 +1,4 @@
-import { useFonts, PublicSans_300Light, PublicSans_400Regular, PublicSans_500Medium, PublicSans_600SemiBold, PublicSans_700Bold } from '@expo-google-fonts/public-sans';
+import { useFonts } from 'expo-font';
 import { useEffect } from 'react';
 
 import * as SplashScreen from 'expo-splash-screen';
@@ -13,6 +13,13 @@ import { SettingsProvider } from '@/hooks/useSettings';
 import { ToastProvider } from '@/components/Toast';
 import { useTheme } from '@/theme/useTheme';
 import { extractUrl } from '@/utils/url';
+
+// Per-weight files: the package barrel would bundle all 18 Public Sans faces (~3 MB).
+const PublicSans_300Light = require('@expo-google-fonts/public-sans/300Light/PublicSans_300Light.ttf');
+const PublicSans_400Regular = require('@expo-google-fonts/public-sans/400Regular/PublicSans_400Regular.ttf');
+const PublicSans_500Medium = require('@expo-google-fonts/public-sans/500Medium/PublicSans_500Medium.ttf');
+const PublicSans_600SemiBold = require('@expo-google-fonts/public-sans/600SemiBold/PublicSans_600SemiBold.ttf');
+const PublicSans_700Bold = require('@expo-google-fonts/public-sans/700Bold/PublicSans_700Bold.ttf');
 
 /** Opens the Save Link screen with the URL from a share-sheet action (cold or warm start). */
 function ShareIntentRouter() {

@@ -17,18 +17,34 @@ type Props = {
   onClose: () => void;
 };
 
+function Row({
+  label,
+  color,
+  selected,
+  borderColor,
+  textColor,
+  onPress,
+}: {
+  label: string;
+  color: string;
+  selected: boolean;
+  borderColor: string;
+  textColor: string;
+  onPress: () => void;
+}) {
+  return (
+    <Pressable onPress={onPress} accessibilityRole="button" style={({ pressed }) => [styles.row, { opacity: pressed ? 0.6 : 1, borderColor }]}>
+      <View style={[styles.dot, { backgroundColor: color }]} />
+      <Text style={[typography.body, { flex: 1, color: textColor, fontSize: 16 }]}>{label}</Text>
+      {selected && <Icon name="checkmark" size={20} color={textColor} />}
+    </Pressable>
+  );
+}
+
 /** Modal list for choosing a folder. Used by Move, Save, and folder-delete flows. */
 export function FolderPicker({ visible, folders, selectedId, allowNone = true, exclude = [], onSelect, onClose }: Props) {
   const { colors } = useTheme();
   const options = folders.filter((f) => !exclude.includes(f.id));
-
-  const Row = ({ label, color, selected, onPress }: { label: string; color: string; selected: boolean; onPress: () => void }) => (
-    <Pressable onPress={onPress} accessibilityRole="button" style={({ pressed }) => [styles.row, { opacity: pressed ? 0.6 : 1, borderColor: colors.border }]}>
-      <View style={[styles.dot, { backgroundColor: color }]} />
-      <Text style={[typography.body, { flex: 1, color: colors.text, fontSize: 16 }]}>{label}</Text>
-      {selected && <Icon name="checkmark" size={20} color={colors.text} />}
-    </Pressable>
-  );
 
   return (
     <Modal visible={visible} animationType="slide" presentationStyle="pageSheet" onRequestClose={onClose}>
@@ -41,10 +57,10 @@ export function FolderPicker({ visible, folders, selectedId, allowNone = true, e
         </View>
         <ScrollView contentContainerStyle={{ paddingHorizontal: spacing.lg, paddingBottom: spacing.xxl }}>
           {allowNone && (
-            <Row label="All Links (no shelf)" color={colors.muted} selected={selectedId === null} onPress={() => onSelect(null)} />
+            <Row label="All Links (no shelf)" color={colors.muted} selected={selectedId === null} borderColor={colors.border} textColor={colors.text} onPress={() => onSelect(null)} />
           )}
           {options.map((f) => (
-            <Row key={f.id} label={f.name} color={f.color} selected={selectedId === f.id} onPress={() => onSelect(f.id)} />
+            <Row key={f.id} label={f.name} color={f.color} selected={selectedId === f.id} borderColor={colors.border} textColor={colors.text} onPress={() => onSelect(f.id)} />
           ))}
         </ScrollView>
       </View>

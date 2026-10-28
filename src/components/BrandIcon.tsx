@@ -1,4 +1,7 @@
-import { IconBrandGoogle, IconBrandInstagram, IconBrandYoutube, IconWorld } from '@tabler/icons-react-native';
+import IconBrandGoogle from '@tabler/icons-react-native/IconBrandGoogle';
+import IconBrandInstagram from '@tabler/icons-react-native/IconBrandInstagram';
+import IconBrandYoutube from '@tabler/icons-react-native/IconBrandYoutube';
+import IconWorld from '@tabler/icons-react-native/IconWorld';
 import { useTheme } from '@/theme/useTheme';
 
 export type Brand = 'youtube' | 'instagram' | 'google' | 'web';

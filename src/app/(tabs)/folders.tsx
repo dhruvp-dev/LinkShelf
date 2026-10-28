@@ -9,6 +9,8 @@ import { radii, spacing, typography } from '@/theme/tokens';
 import { FolderRow } from '@/components/FolderRow';
 import type { Folder } from '@/types/folder';
 
+const Separator = () => <View style={{ height: spacing.sm }} />;
+
 export default function FoldersScreen() {
   const router = useRouter();
   const { colors } = useTheme();
@@ -59,7 +61,7 @@ export default function FoldersScreen() {
             onMore={() => actions.onMore(item)}
           />
         )}
-        ItemSeparatorComponent={() => <View style={{ height: spacing.sm }} />}
+        ItemSeparatorComponent={Separator}
         contentContainerStyle={styles.list}
         ListHeaderComponent={
           <View style={{ gap: spacing.sm, marginBottom: spacing.md }}>
