@@ -1,156 +1,175 @@
-import type { ComponentType } from 'react';
-import IconArrowBackUp from '@tabler/icons-react-native/IconArrowBackUp';
-import IconBook from '@tabler/icons-react-native/IconBook';
-import IconBookmark from '@tabler/icons-react-native/IconBookmark';
-import IconBrandInstagram from '@tabler/icons-react-native/IconBrandInstagram';
-import IconBrandYoutube from '@tabler/icons-react-native/IconBrandYoutube';
-import IconBulb from '@tabler/icons-react-native/IconBulb';
-import IconCheck from '@tabler/icons-react-native/IconCheck';
-import IconChevronRight from '@tabler/icons-react-native/IconChevronRight';
-import IconCircleX from '@tabler/icons-react-native/IconCircleX';
-import IconClipboard from '@tabler/icons-react-native/IconClipboard';
-import IconClock from '@tabler/icons-react-native/IconClock';
-import IconCode from '@tabler/icons-react-native/IconCode';
-import IconCoffee from '@tabler/icons-react-native/IconCoffee';
-import IconCompass from '@tabler/icons-react-native/IconCompass';
-import IconCopy from '@tabler/icons-react-native/IconCopy';
-import IconDeviceMobile from '@tabler/icons-react-native/IconDeviceMobile';
-import IconDots from '@tabler/icons-react-native/IconDots';
-import IconDownload from '@tabler/icons-react-native/IconDownload';
-import IconExternalLink from '@tabler/icons-react-native/IconExternalLink';
-import IconFolder from '@tabler/icons-react-native/IconFolder';
-import IconFolderOpen from '@tabler/icons-react-native/IconFolderOpen';
-import IconHeart from '@tabler/icons-react-native/IconHeart';
-import IconHome from '@tabler/icons-react-native/IconHome';
-import IconInfoCircle from '@tabler/icons-react-native/IconInfoCircle';
-import IconLayoutGrid from '@tabler/icons-react-native/IconLayoutGrid';
-import IconLink from '@tabler/icons-react-native/IconLink';
-import IconList from '@tabler/icons-react-native/IconList';
-import IconMoon from '@tabler/icons-react-native/IconMoon';
-import IconMovie from '@tabler/icons-react-native/IconMovie';
-import IconMusic from '@tabler/icons-react-native/IconMusic';
-import IconPalette from '@tabler/icons-react-native/IconPalette';
-import IconPencil from '@tabler/icons-react-native/IconPencil';
-import IconPlane from '@tabler/icons-react-native/IconPlane';
-import IconPlus from '@tabler/icons-react-native/IconPlus';
-import IconSearch from '@tabler/icons-react-native/IconSearch';
-import IconSettings from '@tabler/icons-react-native/IconSettings';
-import IconStack2 from '@tabler/icons-react-native/IconStack2';
-import IconStar from '@tabler/icons-react-native/IconStar';
-import IconStarFilled from '@tabler/icons-react-native/IconStarFilled';
-import IconSun from '@tabler/icons-react-native/IconSun';
-import IconTrash from '@tabler/icons-react-native/IconTrash';
-import IconUpload from '@tabler/icons-react-native/IconUpload';
-import IconUser from '@tabler/icons-react-native/IconUser';
-import IconWorld from '@tabler/icons-react-native/IconWorld';
-import IconX from '@tabler/icons-react-native/IconX';
-import IconSunMoon from '@tabler/icons-react-native/IconSunMoon';
-import IconLayoutList from '@tabler/icons-react-native/IconLayoutList';
-import IconArrowsSort from '@tabler/icons-react-native/IconArrowsSort';
-import IconDatabase from '@tabler/icons-react-native/IconDatabase';
-import IconRefresh from '@tabler/icons-react-native/IconRefresh';
-import IconHomeFilled from '@tabler/icons-react-native/IconHomeFilled';
-import IconSearchFilled from '@tabler/icons-react-native/IconSearchFilled';
-import IconStackFilled from '@tabler/icons-react-native/IconStackFilled';
-import IconSettingsFilled from '@tabler/icons-react-native/IconSettingsFilled';
-import IconLayoutGridFilled from '@tabler/icons-react-native/IconLayoutGridFilled';
-import IconUserFilled from '@tabler/icons-react-native/IconUserFilled';
-import IconPlusFilled from '@tabler/icons-react-native/IconPlusFilled';
-import IconBookmarkFilled from '@tabler/icons-react-native/IconBookmarkFilled';
-import IconFolderFilled from '@tabler/icons-react-native/IconFolderFilled';
+import type { StyleProp, ViewStyle } from 'react-native';
+import {
+  Add,
+  Airplane,
+  ArrowRightUp,
+  Book,
+  Bookmark,
+  Bulb,
+  Check,
+  ChevronRight,
+  Clipboard,
+  Clock,
+  CloseCircle,
+  Code,
+  Coffee,
+  Compass,
+  Copy,
+  Database,
+  Download,
+  Edit,
+  Film,
+  Folder,
+  FolderOpen,
+  Globe,
+  Grid,
+  Heart,
+  Home,
+  InfoCircle,
+  Instagram,
+  Layers,
+  Link,
+  List3,
+  Mobile,
+  Moon,
+  More,
+  Music,
+  Palette,
+  PlayCircle,
+  Refresh,
+  Search,
+  Setting,
+  Sort,
+  Star,
+  Sun,
+  Trash,
+  Undo,
+  Upload,
+  User,
+  X,
+  type IconComponent,
+  type IconWeight,
+} from 'reicon-react-native';
 
-type IconProps = { size?: number; color?: string; strokeWidth?: number };
+export type { IconWeight };
 
-/** Filled variants used for the active tab and selected states. Names without an entry stay outlined. */
-const FILLED: Partial<Record<string, ComponentType<IconProps>>> = {
-  home: IconHomeFilled,
-  search: IconSearchFilled,
-  folders: IconStackFilled,
-  folder: IconFolderFilled,
-  settings: IconSettingsFilled,
-  star: IconStarFilled,
-  'star-filled': IconStarFilled,
-  grid: IconLayoutGridFilled,
-  person: IconUserFilled,
-  add: IconPlusFilled,
-  bookmark: IconBookmarkFilled,
+export type IconProps = {
+  size?: number;
+  color?: string;
+  strokeWidth?: number | string;
+  weight?: IconWeight;
+  filled?: boolean;
+  style?: StyleProp<ViewStyle>;
 };
 
 /**
- * Tabler icons for every glyph in the app. Callers keep the same names; this table is the only
- * place that decides which Tabler icon each one uses.
+ * Reicon icon glyph registry. Callers keep standard app icon names; this table maps them
+ * directly to reicon-react-native vector components.
  */
 const ICONS = {
-  add: IconPlus,
-  albums: IconLayoutGrid,
-  'albums-outline': IconLayoutGrid,
-  'arrow-undo-outline': IconArrowBackUp,
-  'arrow-up-outline': IconExternalLink,
-  bookmark: IconBookmark,
-  'bookmarks-outline': IconStack2,
-  checkmark: IconCheck,
-  'chevron-forward': IconChevronRight,
-  'clipboard-outline': IconClipboard,
-  close: IconX,
-  'close-circle': IconCircleX,
-  'close-outline': IconX,
-  'color-palette-outline': IconPalette,
-  compass: IconCompass,
-  'copy-outline': IconCopy,
-  'create-outline': IconPencil,
-  'download-outline': IconDownload,
-  'ellipsis-horizontal': IconDots,
-  'folder-outline': IconFolder,
-  folder: IconFolder,
-  'folder-open': IconFolderOpen,
-  'folder-open-outline': IconFolderOpen,
-  folders: IconStack2,
-  globe: IconWorld,
-  'globe-outline': IconWorld,
-  grid: IconLayoutGrid,
-  home: IconHome,
-  'link-outline': IconLink,
-  list: IconList,
-  layers: IconStack2,
-  'logo-instagram': IconBrandInstagram,
-  'logo-youtube': IconBrandYoutube,
-  'moon-outline': IconMoon,
-  'open-outline': IconExternalLink,
-  person: IconUser,
-  'phone-portrait-outline': IconDeviceMobile,
-  search: IconSearch,
-  'search-outline': IconSearch,
-  settings: IconSettings,
-  'settings-outline': IconSettings,
-  star: IconStar,
-  'star-outline': IconStar,
-  'star-filled': IconStarFilled,
-  'push-outline': IconUpload,
-  'sunny-outline': IconSun,
-  'time-outline': IconClock,
-  'trash-outline': IconTrash,
-  save: IconBookmark,
-  bulb: IconBulb,
-  'musical-notes': IconMusic,
-  heart: IconHeart,
-  film: IconMovie,
-  cafe: IconCoffee,
-  airplane: IconPlane,
-  'code-slash': IconCode,
-  book: IconBook,
-  'color-palette': IconPalette,
-  info: IconInfoCircle,
-  download: IconDownload,
-  'sun-moon': IconSunMoon,
-  'layout-list': IconLayoutList,
-  'arrows-sort': IconArrowsSort,
-  database: IconDatabase,
-  refresh: IconRefresh,
+  add: Add,
+  albums: Grid,
+  'albums-outline': Grid,
+  'arrow-undo-outline': Undo,
+  'arrow-up-outline': ArrowRightUp,
+  bookmark: Bookmark,
+  'bookmarks-outline': Layers,
+  checkmark: Check,
+  'chevron-forward': ChevronRight,
+  'clipboard-outline': Clipboard,
+  close: X,
+  'close-circle': CloseCircle,
+  'close-outline': X,
+  'color-palette-outline': Palette,
+  compass: Compass,
+  'copy-outline': Copy,
+  'create-outline': Edit,
+  'download-outline': Download,
+  'ellipsis-horizontal': More,
+  'folder-outline': Folder,
+  folder: Folder,
+  'folder-open': FolderOpen,
+  'folder-open-outline': FolderOpen,
+  folders: Layers,
+  globe: Globe,
+  'globe-outline': Globe,
+  grid: Grid,
+  home: Home,
+  'link-outline': Link,
+  list: List3,
+  layers: Layers,
+  'logo-instagram': Instagram,
+  'logo-youtube': PlayCircle,
+  'moon-outline': Moon,
+  'open-outline': ArrowRightUp,
+  person: User,
+  'phone-portrait-outline': Mobile,
+  search: Search,
+  'search-outline': Search,
+  settings: Setting,
+  'settings-outline': Setting,
+  star: Star,
+  'star-outline': Star,
+  'star-filled': Star,
+  'push-outline': Upload,
+  'sunny-outline': Sun,
+  'time-outline': Clock,
+  'trash-outline': Trash,
+  save: Bookmark,
+  bulb: Bulb,
+  'musical-notes': Music,
+  heart: Heart,
+  film: Film,
+  cafe: Coffee,
+  airplane: Airplane,
+  'code-slash': Code,
+  book: Book,
+  'color-palette': Palette,
+  info: InfoCircle,
+  download: Download,
+  'sun-moon': Sun,
+  'layout-list': List3,
+  'arrows-sort': Sort,
+  database: Database,
+  refresh: Refresh,
 } as const;
 
 export type IconName = keyof typeof ICONS;
 
-export function Icon({ name, size = 20, color = '#000', strokeWidth = 1.8, filled = false }: IconProps & { name: IconName; filled?: boolean }) {
-  const Glyph = (filled && FILLED[name]) || (ICONS[name] as ComponentType<IconProps>);
-  return <Glyph size={size} color={color} strokeWidth={strokeWidth} />;
+export function Icon({
+  name,
+  size = 20,
+  color = '#000',
+  strokeWidth,
+  weight,
+  filled,
+  style,
+}: IconProps & { name: IconName }) {
+  const Glyph = (ICONS[name] ?? Star) as IconComponent;
+
+  // Determine icon weight:
+  // 1. Explicit weight prop ('Filled' | 'Outline')
+  // 2. Explicit filled boolean prop
+  // 3. 'star-outline' explicitly resolves to 'Outline' for unstarred state
+  // 4. Default to 'Filled' for rich, modern tactile appearance
+  let resolvedWeight: IconWeight = 'Filled';
+  if (weight) {
+    resolvedWeight = weight;
+  } else if (typeof filled === 'boolean') {
+    resolvedWeight = filled ? 'Filled' : 'Outline';
+  } else if (name === 'star-outline') {
+    resolvedWeight = 'Outline';
+  } else {
+    resolvedWeight = 'Filled';
+  }
+
+  return (
+    <Glyph
+      size={size}
+      color={color}
+      weight={resolvedWeight}
+      strokeWidth={strokeWidth}
+      style={style}
+    />
+  );
 }

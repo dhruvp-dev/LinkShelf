@@ -1,5 +1,5 @@
 import { Tabs, useRouter } from 'expo-router';
-import { Pressable, Text, View, StyleSheet } from 'react-native';
+import { Pressable, View, StyleSheet } from 'react-native';
 import { Icon, type IconName } from '@/components/Icon';
 import { useTheme } from '@/theme/useTheme';
 import { tabBarStyle } from '@/components/tabBarStyle';
@@ -28,10 +28,9 @@ function SaveButton() {
 
 export default function TabsLayout() {
   const { colors } = useTheme();
-  // Only Home fills when active; the other tabs stay outlined.
-  const icon = (name: IconName, fillWhenActive = false) =>
+  const icon = (name: IconName) =>
     function TabIcon({ focused }: { focused: boolean }) {
-      return <Icon name={name} size={24} filled={fillWhenActive && focused} color={focused ? colors.accent : colors.muted} />;
+      return <Icon name={name} size={24} weight="Filled" color={focused ? colors.accent : colors.muted} />;
     };
   return (
     <Tabs
@@ -44,7 +43,7 @@ export default function TabsLayout() {
         tabBarItemStyle: { justifyContent: 'center' },
       }}
     >
-      <Tabs.Screen name="index" options={{ title: 'Home', tabBarIcon: icon('home', true) }} />
+      <Tabs.Screen name="index" options={{ title: 'Home', tabBarIcon: icon('home') }} />
       <Tabs.Screen name="search" options={{ title: 'Search', tabBarIcon: icon('search') }} />
       <Tabs.Screen name="save" options={{ title: '', tabBarButton: () => <SaveButton /> }} />
       <Tabs.Screen name="folders" options={{ title: 'Shelves', tabBarIcon: icon('folders') }} />
