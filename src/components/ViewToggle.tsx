@@ -1,11 +1,11 @@
 import { useEffect } from 'react';
 import { Pressable, View, StyleSheet } from 'react-native';
 import Animated, { useAnimatedStyle, useSharedValue, withSpring } from 'react-native-reanimated';
-import { Icon, type IconName } from '@/components/Icon';
+import { Icon } from '@/components/Icon';
 import * as Haptics from 'expo-haptics';
 import type { ViewMode } from '@/types/link';
 import { useTheme } from '@/theme/useTheme';
-import { radii, spacing } from '@/theme/tokens';
+import { radii } from '@/theme/tokens';
 import { subtleShadow } from '@/theme/neumorphism';
 import { springs } from '@/theme/motion';
 

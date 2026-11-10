@@ -2,7 +2,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useCallback, useEffect, useState } from 'react';
 import { FlatList, Pressable, ScrollView, Text, View, StyleSheet } from 'react-native';
 import { useFocusEffect, useNavigation, useRouter } from 'expo-router';
-import { Icon, type IconName } from '@/components/Icon';
+import { Icon } from '@/components/Icon';
 import { useSQLiteContext } from 'expo-sqlite';
 import { useSettings } from '@/hooks/useSettings';
 import { useLinks } from '@/hooks/useLinks';

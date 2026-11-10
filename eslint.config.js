@@ -9,8 +9,6 @@ module.exports = defineConfig([
   },
   {
     rules: {
-      // Per-icon imports resolve through the package `exports` map, which eslint-plugin-import can't read.
-      'import/no-unresolved': ['error', { ignore: ['^@tabler/icons-react-native/'] }],
       'react/no-unescaped-entities': 'off',
       'react-hooks/set-state-in-effect': 'off',
       'react-hooks/immutability': 'off',

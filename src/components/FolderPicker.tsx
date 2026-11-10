@@ -1,5 +1,5 @@
 import { Modal, Pressable, ScrollView, Text, View, StyleSheet } from 'react-native';
-import { Icon, type IconName } from '@/components/Icon';
+import { Icon } from '@/components/Icon';
 import type { Folder } from '@/types/folder';
 import { useTheme } from '@/theme/useTheme';
 import { radii, spacing, typography } from '@/theme/tokens';

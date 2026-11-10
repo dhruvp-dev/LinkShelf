@@ -9,7 +9,6 @@ import type { Link } from '@/types/link';
 import { useTheme } from '@/theme/useTheme';
 import { radii, spacing, typography } from '@/theme/tokens';
 import { formatDate } from '@/utils/format';
-import { platformFor } from '@/utils/platform';
 import { PlatformBadge } from '@/components/PlatformBadge';
 import { LinkThumbnail } from '@/components/LinkThumbnail';
 import { FolderTag } from '@/components/LinkCard';
@@ -63,8 +62,6 @@ export default function LinkDetailsScreen() {
       />
     );
   }
-
-  const platform = platformFor(link.domain);
 
   return (
     <View style={{ flex: 1, backgroundColor: colors.background }}>

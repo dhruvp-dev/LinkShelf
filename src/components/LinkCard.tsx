@@ -5,7 +5,6 @@ import { Icon } from '@/components/Icon';
 import type { Link } from '@/types/link';
 import { useTheme } from '@/theme/useTheme';
 import { radii, spacing, typography } from '@/theme/tokens';
-import { platformFor } from '@/utils/platform';
 import { PlatformBadge } from './PlatformBadge';
 import { LinkThumbnail } from './LinkThumbnail';
 import { StarButton } from './StarButton';
@@ -20,7 +19,6 @@ type Props = {
 /** Grid card: large preview, platform badge, title, domain, folder tag and actions. */
 function LinkCardBase({ link, onPress, onToggleStar, onMore }: Props) {
   const { colors } = useTheme();
-  const platform = platformFor(link.domain);
   return (
     <Card onPress={() => onPress(link)} accessibilityLabel={link.title} style={styles.card}>
       <View>

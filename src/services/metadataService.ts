@@ -7,6 +7,7 @@ export type LinkMetadata = {
   siteName: string | null;
   thumbnailUrl: string | null;
   faviconUrl: string | null;
+  keywords?: string[];
 };
 
 const TIMEOUT_MS = 8000;
@@ -57,6 +58,14 @@ export function parseHtmlMetadata(html: string, pageUrl: string): LinkMetadata {
   const iconTag = (html.match(/<link\b[^>]*rel\s*=\s*["'][^"']*icon[^"']*["'][^>]*>/gi) ?? [])[0];
 
   const hostname = domainOf(pageUrl);
+  const rawKeywords = pick('keywords', 'news_keywords', 'article:tag');
+  const keywords = rawKeywords
+    ? rawKeywords
+        .split(/[,;]/)
+        .map((k) => k.trim())
+        .filter((k) => k.length > 0)
+    : [];
+
   return {
     title: pick('og:title', 'twitter:title') ?? (titleTag ? decodeEntities(titleTag[1]) : null),
     description: pick('og:description', 'twitter:description', 'description'),
@@ -65,6 +74,7 @@ export function parseHtmlMetadata(html: string, pageUrl: string): LinkMetadata {
     faviconUrl:
       resolveUrl(iconTag ? attr(iconTag, 'href') : undefined, pageUrl) ??
       `https://www.google.com/s2/favicons?domain=${hostname}&sz=128`,
+    keywords,
   };
 }
 
@@ -90,6 +100,7 @@ async function fetchYouTube(url: string): Promise<LinkMetadata | null> {
     siteName: 'YouTube',
     thumbnailUrl: data.thumbnail_url ?? null,
     faviconUrl: 'https://www.google.com/s2/favicons?domain=youtube.com&sz=128',
+    keywords: ['video', 'youtube'],
   };
 }
 

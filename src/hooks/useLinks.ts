@@ -55,6 +55,7 @@ export function useLinks(options: LinkListOptions) {
 
   useFocusEffect(
     useCallback(() => {
+      void key;
       reload();
     }, [reload, key]),
   );
