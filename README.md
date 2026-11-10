@@ -1,5 +1,10 @@
 # LinkShelf
 
+[![CI](https://github.com/dhruvp-dev/LinkShelf/actions/workflows/ci.yml/badge.svg)](https://github.com/dhruvp-dev/LinkShelf/actions/workflows/ci.yml)
+[![Expo SDK 58](https://img.shields.io/badge/Expo-SDK%2058-000020?logo=expo&logoColor=white)](https://expo.dev)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.x-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 A local-first mobile app for saving, organizing, and reopening links from Instagram, YouTube, and the web. All data stays in an on-device SQLite database.
 
 ---

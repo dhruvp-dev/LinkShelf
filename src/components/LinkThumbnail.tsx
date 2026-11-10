@@ -1,7 +1,6 @@
 import { radii } from '@/theme/tokens';
 import { View, Text, StyleSheet, type StyleProp, type ImageStyle } from 'react-native';
 import { Image } from 'expo-image';
-import { Icon, type IconName } from '@/components/Icon';
 import { useTheme } from '@/theme/useTheme';
 import { accentFor } from '@/theme/accents';
 

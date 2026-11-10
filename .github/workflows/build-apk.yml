@@ -1,0 +1,127 @@
+name: Build Android APK (Local Runner)
+
+on:
+  workflow_dispatch:
+    inputs:
+      build_type:
+        description: 'Build Type (release or debug)'
+        required: true
+        default: 'release'
+        type: choice
+        options:
+          - release
+          - debug
+  push:
+    tags:
+      - 'v*'
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Build & Sign Android APK
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Setup Java JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Typecheck & Test
+        run: |
+          npx tsc --noEmit
+          npm test
+
+      - name: Prebuild Android native project
+        run: npx expo prebuild --platform android --clean
+
+      - name: Build APK with Gradle
+        run: |
+          cd android
+          chmod +x gradlew
+          if [ "${{ github.event.inputs.build_type }}" = "debug" ]; then
+            ./gradlew assembleDebug --no-daemon
+          else
+            ./gradlew assembleRelease --no-daemon || ./gradlew assembleDebug --no-daemon
+          fi
+
+      - name: Align and Sign APK
+        env:
+          KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+          KEYSTORE_PASS: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          KEY_PASS: ${{ secrets.ANDROID_KEY_PASSWORD }}
+        run: |
+          BUILD_TOOLS_DIR=$(ls -d $ANDROID_HOME/build-tools/* | sort -V | tail -n 1)
+          RAW_APK=$(find android/app/build/outputs/apk -name "*.apk" | head -n 1)
+          if [ -z "$RAW_APK" ]; then
+            echo "::error::No APK file found in build outputs."
+            exit 1
+          fi
+          echo "Found APK: $RAW_APK"
+          mkdir -p build-output
+
+          # Align APK on 4-byte boundaries
+          $BUILD_TOOLS_DIR/zipalign -f -v -p 4 "$RAW_APK" build-output/LinkShelf-aligned.apk
+
+          # Determine signing keystore
+          if [ -n "$KEYSTORE_BASE64" ]; then
+            echo "✅ Using release keystore configured in GitHub Secrets..."
+            echo "$KEYSTORE_BASE64" | base64 -d > release.keystore
+            KS_PASS="${KEYSTORE_PASS}"
+            KS_ALIAS="${KEY_ALIAS}"
+            KS_KEY_PASS="${KEY_PASS}"
+          else
+            echo "ℹ️ No release keystore secret found. Generating dedicated signing keystore on runner..."
+            KS_PASS="linkshelf_pass"
+            KS_ALIAS="linkshelf_key"
+            KS_KEY_PASS="linkshelf_pass"
+            keytool -genkeypair -v -keystore release.keystore -alias "$KS_ALIAS" \
+              -keyalg RSA -keysize 2048 -validity 10000 \
+              -storepass "$KS_PASS" -keypass "$KS_KEY_PASS" \
+              -dname "CN=LinkShelf, OU=Mobile, O=LinkShelf, L=Unknown, ST=Unknown, C=US"
+          fi
+
+          # Sign APK with v1, v2, and v3 signature schemes
+          $BUILD_TOOLS_DIR/apksigner sign \
+            --ks release.keystore \
+            --ks-pass pass:"$KS_PASS" \
+            --key-pass pass:"$KS_KEY_PASS" \
+            --ks-key-alias "$KS_ALIAS" \
+            --v1-signing-enabled true \
+            --v2-signing-enabled true \
+            --v3-signing-enabled true \
+            --out build-output/LinkShelf-signed.apk \
+            build-output/LinkShelf-aligned.apk
+
+          echo "Verifying APK signature..."
+          $BUILD_TOOLS_DIR/apksigner verify --verbose build-output/LinkShelf-signed.apk
+
+          # Clean up temporary aligned APK and keystore
+          rm -f build-output/LinkShelf-aligned.apk release.keystore
+
+      - name: Upload Signed APK Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: LinkShelf-Signed-APK
+          path: build-output/LinkShelf-signed.apk
+          retention-days: 14

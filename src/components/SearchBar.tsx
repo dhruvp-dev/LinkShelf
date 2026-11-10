@@ -1,5 +1,5 @@
-import { TextInput, Pressable, View, StyleSheet } from 'react-native';
-import { Icon, type IconName } from '@/components/Icon';
+import { TextInput, Pressable, StyleSheet } from 'react-native';
+import { Icon } from '@/components/Icon';
 import { useTheme } from '@/theme/useTheme';
 import { Surface } from './Card';
 import { radii, spacing, typography } from '@/theme/tokens';

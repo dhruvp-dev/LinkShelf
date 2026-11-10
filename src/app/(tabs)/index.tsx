@@ -1,14 +1,13 @@
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useCallback, useEffect, useState } from 'react';
-import { Pressable, ScrollView, Text, View, StyleSheet } from 'react-native';
+import { ScrollView, Text, View, StyleSheet } from 'react-native';
 import { useRouter } from 'expo-router';
-import { Icon, type IconName } from '@/components/Icon';
 import { useSettings } from '@/hooks/useSettings';
 import { useLinks } from '@/hooks/useLinks';
 import { useFolders } from '@/hooks/useFolders';
 import { useLinkActions } from '@/hooks/useLinkActions';
 import { useTheme } from '@/theme/useTheme';
-import { radii, spacing, typography } from '@/theme/tokens';
+import { spacing, typography } from '@/theme/tokens';
 import type { SortKey, ViewMode } from '@/types/link';
 import { LinkCollection } from '@/components/LinkCollection';
 import { FolderCard } from '@/components/FolderCard';

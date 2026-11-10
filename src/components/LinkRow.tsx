@@ -1,11 +1,10 @@
 import { memo } from 'react';
 import { Pressable, Text, View, StyleSheet } from 'react-native';
 import Animated, { useAnimatedStyle, useSharedValue, withSpring } from 'react-native-reanimated';
-import { Icon, type IconName } from '@/components/Icon';
+import { Icon } from '@/components/Icon';
 import type { Link } from '@/types/link';
 import { useTheme } from '@/theme/useTheme';
-import { radii, spacing, typography } from '@/theme/tokens';
-import { platformFor } from '@/utils/platform';
+import { spacing, typography } from '@/theme/tokens';
 import { PlatformBadge } from './PlatformBadge';
 import { LinkThumbnail } from './LinkThumbnail';
 import { StarButton } from './StarButton';
@@ -21,7 +20,6 @@ type Props = {
 /** Compact row for the list view and search results. Direct manipulation press feedback. */
 function LinkRowBase({ link, onPress, onToggleStar, onMore }: Props) {
   const { colors } = useTheme();
-  const platform = platformFor(link.domain);
   const pressed = useSharedValue(0);
 
   const rowStyle = useAnimatedStyle(() => ({
